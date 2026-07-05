@@ -1,0 +1,48 @@
+{% extends "portfolio/base.html" %}
+
+{% load static %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-container">
+
+        <div class="hero-text">
+
+            <h3>Hello, I'm</h3>
+
+            <h1>
+                <span>{{ profile.name }}</span>
+            </h1>
+
+            <h2>{{ profile.title }}</h2>
+
+            <p>{{ profile.hero_description }}</p>
+
+            <!-- Buttons -->
+            <a href="{% url 'contact' %}" class="btn">
+                Let's Connect
+            </a>
+
+            <a href="{% url 'projects' %}" class="btn">
+                View Projects
+            </a>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img src="{{ profile.profile_image.url }}" alt="Nkem Gospel">
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

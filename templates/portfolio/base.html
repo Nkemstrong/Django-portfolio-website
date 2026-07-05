@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{% block title %}Nkem Gospel{% endblock %}</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        <i class="fa-solid fa-laptop-code"></i>
+        <span>Portfolio</span>
+    </div>
+
+    <ul>
+
+        <li>
+            <a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'about' %}" class="{% if request.path == '/about/' %}active{% endif %}">
+                About
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'skills' %}" class="{% if request.path == '/skills/' %}active{% endif %}">
+                Skills
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'projects' %}" class="{% if request.path == '/projects/' %}active{% endif %}">
+                Projects
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}">
+                Contact
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+{% block content %}
+{% endblock %}
+
+<footer>
+
+    © 2026 Nkem Gospel |
+    Biomedical Scientist • Python Backend Developer • Data Scientist
+
+</footer>
+
+</body>
+
+</html>

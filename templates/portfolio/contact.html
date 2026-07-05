@@ -1,0 +1,94 @@
+{% extends "portfolio/base.html" %}
+
+{% block title %}
+Contact
+{% endblock %}
+
+{% block content %}
+
+<section class="contact">
+
+    <h2 class="title">Let's Connect</h2>
+
+    <div class="contact-box">
+
+        <h3>Get in Touch</h3>
+
+        <p>
+            <strong>Name:</strong> {{ profile.name }}
+        </p>
+
+        <p>
+            <strong>Email:</strong>
+            <a href="mailto:{{ profile.email }}">
+                {{ profile.email }}
+            </a>
+        </p>
+
+        <p>
+            I'm always open to internships, backend development,
+            healthcare AI collaborations, research opportunities,
+            and freelance projects.
+        </p>
+
+        <div class="contact-links">
+
+            <p>
+                <strong>Email:</strong>
+                <a href="mailto:{{ profile.email }}">
+                    {{ profile.email }}
+                </a>
+            </p>
+
+            <p>
+                <strong>GitHub:</strong>
+                <a href="{{ profile.github }}" target="_blank">
+                    github.com/Nkemstrong
+                </a>
+            </p>
+
+            <p>
+                <strong>LinkedIn:</strong>
+                <a href="{{ profile.linkedin }}" target="_blank">
+                    Nkem Gospel
+                </a>
+            </p>
+
+            <p>
+                <strong>WhatsApp:</strong>
+                <a href="{{ profile.whatsapp }}" target="_blank">
+                    Chat on WhatsApp
+                </a>
+            </p>
+
+        </div>
+
+        <hr style="margin:40px 0;">
+
+        <h3>Send Me a Message</h3>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="success-message">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button class="btn" type="submit">
+                Send Message
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}
