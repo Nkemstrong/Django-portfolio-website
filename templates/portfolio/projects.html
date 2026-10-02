@@ -8,47 +8,134 @@ Projects
 
 {% block content %}
 
-<section>
+<section class="projects-section">
 
-    <h2 class="title">My Projects</h2>
+    <div class="section-heading">
+
+        <span class="section-eyebrow">
+            MY WORK
+        </span>
+
+        <h1>
+            Selected Projects
+        </h1>
+
+        <p>
+            A collection of digital products, web applications,
+            automation systems, and software solutions I've built.
+        </p>
+
+    </div>
+
 
     <div class="projects-container">
 
-        {% if projects %}
+        {% for project in projects %}
 
-            {% for project in projects %}
+        <article class="project-card">
 
-            <div class="project-card">
+            <!-- Project Image -->
 
-                <img src="{{ project.image.url }}" alt="{{ project.title }}">
+            <div class="project-image">
 
-                <div class="project-content">
+                <img
+                    src="{{ project.image.url }}"
+                    alt="{{ project.title }}"
+                    loading="lazy"
+                >
 
-                    <h3>{{ project.title }}</h3>
+            </div>
 
-                    <p>{{ project.description }}</p>
 
-                    <span class="tech">
+            <!-- Project Content -->
+
+            <div class="project-content">
+
+                <h2>
+                    {{ project.title }}
+                </h2>
+
+
+                <p class="project-description">
+                    {{ project.description }}
+                </p>
+
+
+                <!-- Technologies -->
+
+                <div class="project-technologies">
+
+                    {% for technology in project.technologies|cut:" "|cut:","|add:"" %}
+                    {% endfor %}
+
+                    <span>
                         {{ project.technologies }}
                     </span>
 
-                    <br><br>
+                </div>
 
-                    <a href="{{ project.github }}" target="_blank" class="btn">
-                        View on GitHub
+
+                <!-- Buttons -->
+
+                <div class="project-actions">
+
+                    {% if project.github %}
+
+                    <a
+                        href="{{ project.github }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-btn project-btn-primary"
+                    >
+
+                        <i class="fa-brands fa-github"></i>
+
+                        GitHub
+
                     </a>
+
+                    {% endif %}
+
+
+                    {% if project.demo %}
+
+                    <a
+                        href="{{ project.demo }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-btn project-btn-secondary"
+                    >
+
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                        Live Demo
+
+                    </a>
+
+                    {% endif %}
 
                 </div>
 
             </div>
 
-            {% endfor %}
+        </article>
 
-        {% else %}
 
-            <p>No projects have been added yet.</p>
+        {% empty %}
 
-        {% endif %}
+        <div class="empty-projects">
+
+            <h2>
+                Projects coming soon.
+            </h2>
+
+            <p>
+                I'm currently preparing some projects to showcase here.
+            </p>
+
+        </div>
+
+        {% endfor %}
 
     </div>
 

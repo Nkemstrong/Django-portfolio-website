@@ -5,79 +5,332 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>{% block title %}Nkem Gospel{% endblock %}</title>
+    <meta name="description"
+          content="{% block meta_description %}{{ profile.name }} — {{ profile.title }}{% endblock %}">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>
+        {% block title %}
+        {{ profile.name }} | {{ profile.title }}
+        {% endblock %}
+    </title>
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+          rel="stylesheet">
 
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+
+    {% block extra_css %}
+    {% endblock %}
 
 </head>
 
+
 <body>
 
-<nav>
+    <!-- ================================
+         HEADER
+    ================================= -->
 
-    <div class="logo">
-        <i class="fa-solid fa-laptop-code"></i>
-        <span>Portfolio</span>
-    </div>
+    <header class="site-header">
 
-    <ul>
+        <nav class="navbar">
 
-        <li>
-            <a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">
-                Home
+            <!-- BRAND -->
+
+            <a href="{% url 'home' %}" class="brand">
+
+                <span class="brand-mark">
+                    NG
+                </span>
+
+                <span class="brand-text">
+                    Nkem Gospel
+                </span>
+
             </a>
-        </li>
 
-        <li>
-            <a href="{% url 'about' %}" class="{% if request.path == '/about/' %}active{% endif %}">
-                About
-            </a>
-        </li>
 
-        <li>
-            <a href="{% url 'skills' %}" class="{% if request.path == '/skills/' %}active{% endif %}">
-                Skills
-            </a>
-        </li>
+            <!-- MOBILE MENU BUTTON -->
 
-        <li>
-            <a href="{% url 'projects' %}" class="{% if request.path == '/projects/' %}active{% endif %}">
-                Projects
-            </a>
-        </li>
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                type="button"
+                aria-label="Toggle navigation"
+                aria-expanded="false">
 
-        <li>
-            <a href="{% url 'contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}">
-                Contact
-            </a>
-        </li>
+                <i class="fa-solid fa-bars"></i>
 
-    </ul>
+            </button>
 
-</nav>
 
-{% block content %}
-{% endblock %}
+            <!-- NAVIGATION -->
 
-<footer>
+            <div class="nav-menu" id="navMenu">
 
-    © 2026 Nkem Gospel |
-    Biomedical Scientist • Python Backend Developer • Data Scientist
+                <a href="{% url 'home' %}"
+                   class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                    Home
+                </a>
 
-</footer>
+                <a href="{% url 'about' %}"
+                   class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                    About
+                </a>
+
+                <a href="{% url 'skills' %}"
+                   class="{% if request.resolver_match.url_name == 'skills' %}active{% endif %}">
+                    Skills
+                </a>
+
+                <a href="{% url 'projects' %}"
+                   class="{% if request.resolver_match.url_name == 'projects' %}active{% endif %}">
+                    Projects
+                </a>
+
+                <a href="{% url 'contact' %}"
+                   class="nav-contact {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+                    Contact
+                </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================================
+         MAIN CONTENT
+    ================================= -->
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+    ================================= -->
+
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+
+            <!-- FOOTER BRAND -->
+
+            <div class="footer-brand">
+
+                <a href="{% url 'home' %}" class="brand">
+
+                    <span class="brand-mark">
+                        NG
+                    </span>
+
+                    <span class="brand-text">
+                        Nkem Gospel
+                    </span>
+
+                </a>
+
+                <p>
+                    Building practical digital solutions across
+                    web development, APIs, automation and blockchain.
+                </p>
+
+            </div>
+
+
+            <!-- FOOTER NAVIGATION -->
+
+            <div class="footer-navigation">
+
+                <h4>
+                    Navigation
+                </h4>
+
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+
+                <a href="{% url 'about' %}">
+                    About
+                </a>
+
+                <a href="{% url 'skills' %}">
+                    Skills
+                </a>
+
+                <a href="{% url 'projects' %}">
+                    Projects
+                </a>
+
+                <a href="{% url 'contact' %}">
+                    Contact
+                </a>
+
+            </div>
+
+
+            <!-- FOOTER SOCIALS -->
+
+            <div class="footer-social">
+
+                <h4>
+                    Connect
+                </h4>
+
+
+                {% if profile.github %}
+
+                <a href="{{ profile.github }}"
+                   target="_blank"
+                   rel="noopener noreferrer">
+
+                    <i class="fa-brands fa-github"></i>
+
+                    GitHub
+
+                </a>
+
+                {% endif %}
+
+
+                {% if profile.linkedin %}
+
+                <a href="{{ profile.linkedin }}"
+                   target="_blank"
+                   rel="noopener noreferrer">
+
+                    <i class="fa-brands fa-linkedin-in"></i>
+
+                    LinkedIn
+
+                </a>
+
+                {% endif %}
+
+
+                {% if profile.whatsapp %}
+
+                <a href="{{ profile.whatsapp }}"
+                   target="_blank"
+                   rel="noopener noreferrer">
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                    WhatsApp
+
+                </a>
+
+                {% endif %}
+
+            </div>
+
+
+        </div>
+
+
+        <!-- FOOTER BOTTOM -->
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 {{ profile.name }}. All rights reserved.
+            </p>
+
+            <span>
+                Designed &amp; built with Django
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================================
+         MOBILE NAVIGATION
+    ================================= -->
+
+    <script>
+
+        const menuToggle =
+            document.getElementById("menuToggle");
+
+        const navMenu =
+            document.getElementById("navMenu");
+
+
+        if (menuToggle && navMenu) {
+
+            menuToggle.addEventListener("click", function () {
+
+                const isOpen =
+                    navMenu.classList.toggle("open");
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    isOpen
+                );
+
+                menuToggle.innerHTML = isOpen
+                    ? '<i class="fa-solid fa-xmark"></i>'
+                    : '<i class="fa-solid fa-bars"></i>';
+
+            });
+
+
+            navMenu
+                .querySelectorAll("a")
+                .forEach(function (link) {
+
+                    link.addEventListener(
+                        "click",
+                        function () {
+
+                            navMenu.classList.remove("open");
+
+                            menuToggle.setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+
+                            menuToggle.innerHTML =
+                                '<i class="fa-solid fa-bars"></i>';
+
+                        }
+                    );
+
+                });
+
+        }
+
+    </script>
+
+
+    {% block extra_js %}
+    {% endblock %}
 
 </body>
 

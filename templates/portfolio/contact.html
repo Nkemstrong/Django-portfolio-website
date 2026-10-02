@@ -1,91 +1,267 @@
 {% extends "portfolio/base.html" %}
 
+{% load static %}
+
 {% block title %}
-Contact
+Contact | Nkem Gospel
 {% endblock %}
 
 {% block content %}
 
-<section class="contact">
+<section class="contact-section">
 
-    <h2 class="title">Let's Connect</h2>
+    <!-- Header -->
 
-    <div class="contact-box">
+    <div class="contact-heading">
 
-        <h3>Get in Touch</h3>
+        <span class="section-eyebrow">
+            GET IN TOUCH
+        </span>
 
-        <p>
-            <strong>Name:</strong> {{ profile.name }}
-        </p>
-
-        <p>
-            <strong>Email:</strong>
-            <a href="mailto:{{ profile.email }}">
-                {{ profile.email }}
-            </a>
-        </p>
+        <h1>
+            Let's build something<br>
+            <span>meaningful together.</span>
+        </h1>
 
         <p>
-            I'm always open to internships, backend development,
-            healthcare AI collaborations, research opportunities,
-            and freelance projects.
+            Have a project, product idea, API, automation workflow,
+            or blockchain solution in mind? I'd love to hear about it.
         </p>
 
-        <div class="contact-links">
+    </div>
 
-            <p>
-                <strong>Email:</strong>
-                <a href="mailto:{{ profile.email }}">
-                    {{ profile.email }}
-                </a>
-            </p>
 
-            <p>
-                <strong>GitHub:</strong>
-                <a href="{{ profile.github }}" target="_blank">
-                    github.com/Nkemstrong
-                </a>
-            </p>
+    <!-- Contact Layout -->
 
-            <p>
-                <strong>LinkedIn:</strong>
-                <a href="{{ profile.linkedin }}" target="_blank">
-                    Nkem Gospel
-                </a>
-            </p>
+    <div class="contact-grid">
 
-            <p>
-                <strong>WhatsApp:</strong>
-                <a href="{{ profile.whatsapp }}" target="_blank">
-                    Chat on WhatsApp
-                </a>
-            </p>
+
+        <!-- LEFT: CONTACT INFORMATION -->
+
+        <div class="contact-info">
+
+            <div class="contact-intro">
+
+                <span class="contact-label">
+                    CONTACT DETAILS
+                </span>
+
+                <h2>
+                    Let's start a conversation.
+                </h2>
+
+                <p>
+                    Whether you're looking to build a web application,
+                    integrate an API, automate a workflow, or explore
+                    blockchain and smart-contract solutions, feel free
+                    to reach out.
+                </p>
+
+            </div>
+
+
+            <!-- Location -->
+
+            {% if profile.location %}
+
+            <div class="contact-detail">
+
+                <div class="contact-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Location
+                    </span>
+
+                    <p>
+                        {{ profile.location }}
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            <!-- Email -->
+
+            {% if profile.email %}
+
+            <div class="contact-detail">
+
+                <div class="contact-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Email
+                    </span>
+
+                    <a href="mailto:{{ profile.email }}">
+                        {{ profile.email }}
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            <!-- Availability -->
+
+            <div class="contact-detail">
+
+                <div class="contact-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Availability
+                    </span>
+
+                    <p>
+                        Open to selected projects and collaborations
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Social Links -->
+
+            <div class="contact-socials">
+
+                <span>
+                    FIND ME ONLINE
+                </span>
+
+                <div class="contact-social-links">
+
+                    {% if profile.github %}
+
+                    <a
+                        href="{{ profile.github }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="GitHub"
+                    >
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+
+                    {% endif %}
+
+
+                    {% if profile.linkedin %}
+
+                    <a
+                        href="{{ profile.linkedin }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="LinkedIn"
+                    >
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+
+                    {% endif %}
+
+
+                    {% if profile.whatsapp %}
+
+                    <a
+                        href="{{ profile.whatsapp }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="WhatsApp"
+                    >
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
 
         </div>
 
-        <hr style="margin:40px 0;">
 
-        <h3>Send Me a Message</h3>
+        <!-- RIGHT: CONTACT FORM -->
 
-        {% if messages %}
-            {% for message in messages %}
-                <div class="success-message">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
+        <div class="contact-form-card">
 
-        <form method="POST">
+            <div class="form-header">
 
-            {% csrf_token %}
+                <span>
+                    SEND A MESSAGE
+                </span>
 
-            {{ form.as_p }}
+                <h2>
+                    Tell me about your project.
+                </h2>
 
-            <button class="btn" type="submit">
-                Send Message
-            </button>
+                <p>
+                    Fill out the form below and I'll get back to you
+                    as soon as possible.
+                </p>
 
-        </form>
+            </div>
+
+
+            <!-- Success / Error Messages -->
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="success-message">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <span>
+                            {{ message }}
+                        </span>
+
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+
+            <!-- Form -->
+
+            <form method="POST" class="premium-contact-form">
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button
+                    type="submit"
+                    class="contact-submit"
+                >
+
+                    <span>
+                        Send Message
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+        </div>
 
     </div>
 

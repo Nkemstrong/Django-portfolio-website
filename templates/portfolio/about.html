@@ -1,25 +1,195 @@
 {% extends "portfolio/base.html" %}
 
+{% load static %}
+
 {% block title %}
-
-About
-
+About | {{ profile.name }}
 {% endblock %}
 
 {% block content %}
 
-<section class="about">
+<section class="about-page">
 
-<h2 class="title">
+    <div class="about-page-container">
 
-About Me
+        <!-- INTRO -->
 
-</h2>
+        <div class="about-heading reveal">
 
-<p>
+            <span class="section-label">
+                ABOUT ME
+            </span>
 
-{{ profile.about }}
-</p>
+            <h1>
+                Building practical
+                <span>digital systems.</span>
+            </h1>
+
+            <p class="about-lead">
+                I build digital products that combine thoughtful
+                design, reliable engineering, automation, and
+                emerging technologies.
+            </p>
+
+        </div>
+
+
+        <!-- ABOUT GRID -->
+
+        <div class="about-grid">
+
+            <!-- PROFILE -->
+
+            <div class="about-profile reveal">
+
+                {% if profile.profile_image %}
+
+                <div class="about-image-wrapper">
+
+                    <img
+                        src="{{ profile.profile_image.url }}"
+                        alt="{{ profile.name }}"
+                        class="about-image"
+                    >
+
+                </div>
+
+                {% endif %}
+
+                <div class="about-profile-info">
+
+                    <h3>
+                        {{ profile.name }}
+                    </h3>
+
+                    <p>
+                        {{ profile.title }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTENT -->
+
+            <div class="about-content reveal">
+
+                <span class="content-label">
+                    WHO I AM
+                </span>
+
+                <h2>
+                    Turning ideas into
+                    <span>working products.</span>
+                </h2>
+
+                <p>
+                    {{ profile.about }}
+                </p>
+
+
+                <!-- SPECIALIZATIONS -->
+
+                <div class="about-focus">
+
+                    <div class="focus-card">
+
+                        <div class="focus-icon">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+
+                        <div>
+                            <h3>
+                                Web Development
+                            </h3>
+
+                            <p>
+                                Modern, responsive applications
+                                built with clean and maintainable
+                                code.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="focus-card">
+
+                        <div class="focus-icon">
+                            <i class="fa-solid fa-link"></i>
+                        </div>
+
+                        <div>
+                            <h3>
+                                Blockchain & Web3
+                            </h3>
+
+                            <p>
+                                Smart contracts and decentralized
+                                solutions for emerging digital
+                                ecosystems.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="focus-card">
+
+                        <div class="focus-icon">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+
+                        <div>
+                            <h3>
+                                APIs & Automation
+                            </h3>
+
+                            <p>
+                                Connected systems and automated
+                                workflows that reduce repetitive
+                                work.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CTA -->
+
+                <div class="about-actions">
+
+                    <a
+                        href="{% url 'projects' %}"
+                        class="btn btn-primary"
+                    >
+
+                        Explore My Work
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                    <a
+                        href="{% url 'contact' %}"
+                        class="btn btn-secondary"
+                    >
+
+                        Let's Work Together
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 

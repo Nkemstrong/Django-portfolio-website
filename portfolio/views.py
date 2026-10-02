@@ -10,11 +10,65 @@ from .forms import ContactForm
 def home(request):
 
     profile = Profile.objects.first()
+    skills = Skill.objects.all()
+    projects = Project.objects.all().order_by("-created")
+
+    if request.method == "POST":
+
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+
+            data = form.cleaned_data
+
+            send_mail(
+                subject=f"Portfolio Contact: {data['subject']}",
+
+                message=f"""
+You have received a new message from your portfolio website.
+
+Name: {data['name']}
+
+Email: {data['email']}
+
+Subject: {data['subject']}
+
+Message:
+
+{data['message']}
+""",
+
+                from_email=settings.DEFAULT_FROM_EMAIL,
+
+                recipient_list=[
+                    "nkemstrong223@gmail.com",
+                ],
+
+                fail_silently=False,
+            )
+
+            messages.success(
+                request,
+                "Thank you! Your message has been sent successfully."
+            )
+
+            return redirect("/#contact")
+
+    else:
+
+        form = ContactForm()
 
     return render(
         request,
         "portfolio/home.html",
-        {"profile": profile},
+        {
+            "profile": profile,
+            "skills": skills,
+            "projects": projects,
+            "form": form,
+        },
     )
 
 
@@ -93,7 +147,7 @@ Message:
 
             messages.success(
                 request,
-                "✅ Thank you! Your message has been sent successfully."
+                "Thank you! Your message has been sent successfully."
             )
 
             form = ContactForm()

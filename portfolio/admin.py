@@ -16,6 +16,9 @@ class ProjectAdmin(admin.ModelAdmin):
         "technologies",
     )
 
+    list_filter = (
+        "created",
+    )
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
