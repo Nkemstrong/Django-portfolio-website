@@ -1,40 +1,119 @@
 {% extends "portfolio/base.html" %}
 
+{% load static %}
+
 {% block title %}
-Skills
+Skills | {{ profile.name }}
 {% endblock %}
 
 {% block content %}
 
-<section>
+<section class="skills-page">
 
-    <h2 class="title">Skills</h2>
+    <div class="skills-header">
 
-    <div class="skills-container">
+        <span class="section-label">
+            MY EXPERTISE
+        </span>
+
+        <h1>
+            Technologies I build with.
+        </h1>
+
+        <p>
+            A practical toolkit for building modern web applications,
+            reliable APIs, automated workflows, and blockchain-powered
+            solutions.
+        </p>
+
+    </div>
+
+
+    <div class="skills-grid">
 
         {% for skill in skills %}
 
-        <div class="skill">
+        <article class="skill-card"
+                 style="--skill-level: {{ skill.proficiency }}%;">
 
-            <div class="skill-header">
-                <h3>{{ skill.name }}</h3>
-                <span>{{ skill.proficiency }}%</span>
+            <div class="skill-card-top">
+
+                <div class="skill-icon">
+
+                    {% if skill.name == "Python" %}
+                        <i class="fa-brands fa-python"></i>
+
+                    {% elif skill.name == "Django" %}
+                        <i class="fa-solid fa-server"></i>
+
+                    {% elif skill.name == "HTML" %}
+                        <i class="fa-brands fa-html5"></i>
+
+                    {% elif skill.name == "CSS" %}
+                        <i class="fa-brands fa-css3-alt"></i>
+
+                    {% elif skill.name == "JavaScript" %}
+                        <i class="fa-brands fa-js"></i>
+
+                    {% elif skill.name == "Git & GitHub" %}
+                        <i class="fa-brands fa-github"></i>
+
+                    {% elif skill.name == "REST APIs" %}
+                        <i class="fa-solid fa-plug"></i>
+
+                    {% elif skill.name == "SQL & Databases" %}
+                        <i class="fa-solid fa-database"></i>
+
+                    {% elif skill.name == "Responsive Web Design" %}
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+
+                    {% else %}
+                        <i class="fa-solid fa-code"></i>
+                    {% endif %}
+
+                </div>
+
+
+                <div class="skill-percentage">
+                    <span class="counter"
+                          data-target="{{ skill.proficiency }}">
+                        0
+                    </span>%
+                </div>
+
             </div>
 
-            <p>{{ skill.description }}</p>
 
-            <div class="skill-bar">
-                <div
-                    class="skill-progress"
-                    data-width="{{ skill.proficiency }}"
-                ></div>
+            <h3>
+                {{ skill.name }}
+            </h3>
+
+
+            {% if skill.description %}
+            <p>
+                {{ skill.description }}
+            </p>
+            {% endif %}
+
+
+            <div class="skill-progress">
+
+                <div class="skill-progress-bar"></div>
+
             </div>
 
-        </div>
 
-        {% empty %}
+            <div class="skill-level">
 
-        <p>No skills added yet.</p>
+                <span>Proficiency</span>
+
+                <span>
+                    {{ skill.proficiency }}%
+                </span>
+
+            </div>
+
+        </article>
 
         {% endfor %}
 
@@ -42,24 +121,91 @@ Skills
 
 </section>
 
+{% endblock %}
+
+
+{% block extra_js %}
+
 <script>
+
 document.addEventListener("DOMContentLoaded", function () {
 
-    const progressBars = document.querySelectorAll(".skill-progress");
+    const cards = document.querySelectorAll(".skill-card");
 
-    progressBars.forEach(function (bar) {
+    cards.forEach((card, index) => {
 
-        const percentage = bar.dataset.width;
-
-        bar.style.width = "0%";
-
-        setTimeout(function () {
-            bar.style.width = percentage + "%";
-        }, 150);
+        setTimeout(() => {
+            card.classList.add("show");
+        }, index * 100);
 
     });
 
+
+    const counters = document.querySelectorAll(".counter");
+
+    counters.forEach(counter => {
+
+        const target = Number(counter.dataset.target);
+
+        let current = 0;
+
+        const duration = 1200;
+        const startTime = performance.now();
+
+        function animateCounter(time) {
+
+            const progress = Math.min(
+                (time - startTime) / duration,
+                1
+            );
+
+            current = Math.floor(
+                progress * target
+            );
+
+            counter.textContent = current;
+
+            if (progress < 1) {
+                requestAnimationFrame(animateCounter);
+            } else {
+                counter.textContent = target;
+            }
+
+        }
+
+        requestAnimationFrame(animateCounter);
+
+    });
+
+
+    const observer = new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("animate-progress");
+
+                    observer.unobserve(entry.target);
+
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.25
+        }
+    );
+
+
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+
 });
+
 </script>
 
 {% endblock %}

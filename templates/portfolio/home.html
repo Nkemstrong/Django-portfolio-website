@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-Home
+{{ profile.name }} | {{ profile.title }}
 {% endblock %}
 
 {% block content %}
@@ -12,32 +12,270 @@ Home
 
     <div class="hero-container">
 
-        <div class="hero-text">
+        <!-- HERO CONTENT -->
+        <div class="hero-content">
 
-            <h3>Hello, I'm</h3>
+            <div class="hero-eyebrow">
+                Software Developer
+            </div>
 
             <h1>
+                Hello, I'm
                 <span>{{ profile.name }}</span>
             </h1>
 
-            <h2>{{ profile.title }}</h2>
+            <p class="hero-description">
+                {{ profile.hero_description }}
+            </p>
 
-            <p>{{ profile.hero_description }}</p>
+            <div class="hero-buttons">
 
-            <!-- Buttons -->
-            <a href="{% url 'contact' %}" class="btn">
-                Let's Connect
-            </a>
+                <a href="{% url 'projects' %}"
+                   class="btn btn-primary">
 
-            <a href="{% url 'projects' %}" class="btn">
-                View Projects
+                    View My Projects
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+                <a href="{% url 'contact' %}"
+                   class="btn btn-secondary">
+
+                    Let's Connect
+
+                </a>
+
+            </div>
+
+
+            <!-- SOCIAL LINKS -->
+
+            <div class="hero-socials">
+
+                {% if profile.github %}
+
+                <a href="{{ profile.github }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="GitHub">
+
+                    <i class="fa-brands fa-github"></i>
+
+                </a>
+
+                {% endif %}
+
+
+                {% if profile.linkedin %}
+
+                <a href="{{ profile.linkedin }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="LinkedIn">
+
+                    <i class="fa-brands fa-linkedin-in"></i>
+
+                </a>
+
+                {% endif %}
+
+
+                {% if profile.whatsapp %}
+
+                <a href="{{ profile.whatsapp }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="WhatsApp">
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                </a>
+
+                {% endif %}
+
+
+                {% if profile.email %}
+
+                <a href="mailto:{{ profile.email }}"
+                   aria-label="Email">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- HERO IMAGE -->
+
+        <div class="hero-visual">
+
+            {% if profile.profile_image %}
+
+            <div class="hero-image-wrapper">
+
+                <img
+                    src="{{ profile.profile_image.url }}"
+                    alt="{{ profile.name }}"
+                    class="hero-image"
+                >
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QUICK INTRODUCTION -->
+
+<section class="about-section">
+
+    <div class="about-container">
+
+        <!-- ABOUT CONTENT -->
+
+        <div class="about-content">
+
+            <span class="section-label">
+                ABOUT ME
+            </span>
+
+            <h2>
+                Building practical
+                <span>digital solutions.</span>
+            </h2>
+
+            <p>
+                {{ profile.about }}
+            </p>
+
+            <a href="{% url 'about' %}"
+               class="btn btn-primary">
+
+                More About Me
+
+                <i class="fa-solid fa-arrow-right"></i>
+
             </a>
 
         </div>
 
-        <div class="hero-image">
 
-            <img src="{{ profile.profile_image.url }}" alt="Nkem Gospel">
+        <!-- DEVELOPER VISUAL -->
+
+        <div class="about-visual">
+
+            <div class="code-card">
+
+                <div class="code-header">
+
+                    <div class="code-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <span class="code-title">
+                        developer.py
+                    </span>
+
+                    <span class="code-status">
+                        ● online
+                    </span>
+
+                </div>
+
+
+                <div class="code-body">
+
+                    <div class="code-line">
+                        <span class="line-number">01</span>
+                        <span class="code-purple">class</span>
+                        <span class="code-white">Developer:</span>
+                    </div>
+
+                    <div class="code-line">
+                        <span class="line-number">02</span>
+                        <span class="indent"> </span>
+                        <span class="code-purple">def</span>
+                        <span class="code-green">build</span>
+                        <span class="code-white">(self):</span>
+                    </div>
+
+                    <div class="code-line">
+                        <span class="line-number">03</span>
+                        <span class="indent"></span>
+                        <span class="code-white">return</span>
+                        <span class="code-yellow">[</span>
+                    </div>
+
+                    <div class="code-line">
+                        <span class="line-number">04</span>
+                        <span class="indent"></span>
+                        <span class="code-string">"Web Applications"</span>
+                    </div>
+
+                    <div class="code-line">
+                        <span class="line-number">05</span>
+                        <span class="indent"></span>
+                        <span class="code-string">"APIs"</span>
+                    </div>
+
+                    <div class="code-line">
+                        <span class="line-number">06</span>
+                        <span class="indent"></span>
+                        <span class="code-string">"Automation"</span>
+                    </div>
+
+                    <div class="code-line">
+                        <span class="line-number">07</span>
+                        <span class="indent"></span>
+                        <span class="code-string">"Smart Contracts"</span>
+                    </div>
+
+                    <div class="code-line">
+                        <span class="line-number">08</span>
+                        <span class="indent"></span>
+                        <span class="code-yellow">]</span>
+                    </div>
+
+                    <div class="code-line">
+                        <span class="line-number">09</span>
+                        <span class="code-purple">return</span>
+                        <span class="code-green">"Building..."</span>
+                    </div>
+
+                </div>
+
+
+                <!-- FLOATING TECHNOLOGY BADGES -->
+
+                <div class="tech-badge badge-api">
+                    <i class="fa-solid fa-plug"></i>
+                    APIs
+                </div>
+
+                <div class="tech-badge badge-blockchain">
+                    <i class="fa-solid fa-link"></i>
+                    Blockchain
+                </div>
+
+                <div class="tech-badge badge-automation">
+                    <i class="fa-solid fa-gears"></i>
+                    Automation
+                </div>
+
+            </div>
 
         </div>
 

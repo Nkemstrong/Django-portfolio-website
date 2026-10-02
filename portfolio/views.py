@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 
 from .models import Project, Skill, Profile
 from .forms import ContactForm
+
 
 
 def home(request):
@@ -19,10 +20,12 @@ def home(request):
 
         if form.is_valid():
 
-            form.save()
-
             data = form.cleaned_data
 
+            # Save message to database
+            form.save()
+
+            # Send email notification
             send_mail(
                 subject=f"Portfolio Contact: {data['subject']}",
 
@@ -30,13 +33,10 @@ def home(request):
 You have received a new message from your portfolio website.
 
 Name: {data['name']}
-
 Email: {data['email']}
-
 Subject: {data['subject']}
 
 Message:
-
 {data['message']}
 """,
 
@@ -57,7 +57,6 @@ Message:
             return redirect("/#contact")
 
     else:
-
         form = ContactForm()
 
     return render(
@@ -139,7 +138,7 @@ Message:
                 from_email=settings.DEFAULT_FROM_EMAIL,
 
                 recipient_list=[
-                    "nkemstrong223@gmail.com",
+                    settings.EMAIL_HOST_USER,
                 ],
 
                 fail_silently=False,
@@ -150,7 +149,7 @@ Message:
                 "Thank you! Your message has been sent successfully."
             )
 
-            form = ContactForm()
+            return redirect("contact")
 
     else:
 
