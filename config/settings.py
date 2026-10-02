@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("nkem_DATABASE_URL")
 
 if DATABASE_URL:
     DATABASES = {
