@@ -39,7 +39,7 @@ Projects
             <div class="project-image">
 
                 <img
-                    src="{{ project.image.url }}"
+                    src="{% static 'images/projects/' %}{{ project.image.name|cut:'projects/' }}"
                     alt="{{ project.title }}"
                     loading="lazy"
                 >

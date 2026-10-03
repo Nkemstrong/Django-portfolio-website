@@ -1,6 +1,6 @@
-{% extends "portfolio/base.html" %}
-
 {% load static %}
+
+{% extends "portfolio/base.html" %}
 
 {% block title %}
 {{ profile.name }} | {{ profile.title }}
@@ -120,7 +120,7 @@
             <div class="hero-image-wrapper">
 
                 <img
-                    src="{{ profile.profile_image.url }}"
+                    src="{% static 'images/profile/profil.jpeg' %}"
                     alt="{{ profile.name }}"
                     class="hero-image"
                 >
