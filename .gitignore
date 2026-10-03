@@ -11,8 +11,8 @@ env/
 db.sqlite3
 
 # Media uploads
-media/
-
+# media/
+ 
 # Environment variables
 .env
 *.pyc
